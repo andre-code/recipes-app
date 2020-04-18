@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    Recipe Collection
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-around flex-wrap" *ngIf="recipes && recipes.length>0">
+          <div class="card recipe-list-card" *ngFor="let recipe of recipes" (click)="goToRecipe(recipe.id)">
+            <img class="card-img-top recipe-list-img" [src]="recipe.image" [title]="recipe.title">
+            <div class="card-body recipe-list-body">
+              <h5 class="card-title recipe-list-title">{{ recipe.title }}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around flex-wrap" *ngIf="!recipes || recipes.length<=0">
+          🤷‍♀️ List Empty!
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

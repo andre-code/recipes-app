@@ -1,0 +1,56 @@
+<div class="card" *ngIf="recipe">
+  <div class="card-header">
+    Recipe: {{ recipe?.title }}
+  </div>
+  <div class="card-body recipe-card-main">
+    <div class="row">
+      <div class="col-md-6">
+        <img class="recipe-detail-img" [src]="recipe?.image" alt="{{ recipe?.title }}">
+      </div>
+      <div class="col-md-6">
+        🌱 Vegan: {{ recipe.vegan }}<br>
+        🌾 Gluten free: {{ recipe.glutenFree }}<br>
+        ⌛ Preparation min: {{ recipe.preparationMinutes }}<br><br>
+        <button type="button" class="btn btn-primary btn-sm" (click)="setAsFavorite()">Add Collection</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">Instructions:</h5>
+          </div>
+          <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let instruction of instructions">
+                  <b>{{instruction.number}}</b> {{instruction.step}}
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">Ingredients</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let ingredient of ingredients">
+                <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ingredient.image}}" alt="">
+                <span>{{ingredient.original}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button
+    class="btn btn-outline-secondary"
+    (click)="onBack()"
+    style='width:80px'>
+  <i class="fa fa-chevron-left"></i>Back</button>
+  </div>
+</div>
