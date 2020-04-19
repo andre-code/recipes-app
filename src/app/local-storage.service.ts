@@ -19,4 +19,9 @@ export class LocalStorageService {
     public getCollection(): any[] {
       return this.storage.get(STORAGE_KEY);
     }
+    public alreadyExist(id: number): boolean {
+      const recipes = [...this.storage.get(STORAGE_KEY)];
+      const matchRecipe = recipes.filter( recipe => recipe.id == id);
+      return matchRecipe.length > 0;
+    }
 }

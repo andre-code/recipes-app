@@ -12,6 +12,7 @@ export class RecipeDetailComponent implements OnInit {
   public recipe: any;
   public instructions: string[];
   public ingredients: string[];
+  public isAddedToCollection: boolean = false;
 
 
   constructor(
@@ -28,6 +29,8 @@ export class RecipeDetailComponent implements OnInit {
         this.instructions = data.analyzedInstructions[0].steps;
         this.ingredients = data.extendedIngredients;
         console.log(data.extendedIngredients);
+        this.isAddedToCollection = this._localStorageService.alreadyExist(this.recipe.id);
+        console.log('exist?', this.isAddedToCollection);
       },
       error: err => console.log('err:', err),
     });
@@ -37,6 +40,7 @@ export class RecipeDetailComponent implements OnInit {
   }
   setAsFavorite(): void {
     this._localStorageService.storeOnLocalStorage(this.recipe);
+    this.isAddedToCollection = true;
   }
 
 }

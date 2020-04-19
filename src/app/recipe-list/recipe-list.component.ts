@@ -11,6 +11,7 @@ import { FormControl, FormBuilder } from '@angular/forms';
 export class RecipeListComponent implements OnInit {
   public pageTitle: string = "Recipe List";
   public inProgress: boolean = true;
+  public offset:number = 0;
   public recipes: any[];
   public cusines: string[] = ['Latin American','Italian','Mexican','German'];
   public types: string[] = ['lunch','dessert','salad','sauce','soup','snack','drink'];
@@ -40,8 +41,12 @@ export class RecipeListComponent implements OnInit {
   }
   getRecipes() {
     this.inProgress = true;
-    this._recipeService.getRecipes(this.registrationForm.get('type').value, this.registrationForm.get('cusine').value)
-    .subscribe( {
+    this.offset +=20;
+    this._recipeService.getRecipes(
+      this.registrationForm.get('type').value,
+      this.registrationForm.get('cusine').value,
+      this.offset.toString(),
+    ).subscribe( {
       next: data => {
         this.recipes = data.results;
         this.inProgress = false;

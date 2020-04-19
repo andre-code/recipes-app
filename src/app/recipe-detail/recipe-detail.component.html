@@ -11,7 +11,12 @@
         🌱 Vegan: {{ recipe.vegan }}<br>
         🌾 Gluten free: {{ recipe.glutenFree }}<br>
         ⌛ Preparation min: {{ recipe.preparationMinutes }}<br><br>
-        <button type="button" class="btn btn-primary btn-sm" (click)="setAsFavorite()">Add Collection</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="setAsFavorite()" *ngIf="!isAddedToCollection">
+          Add to Collection</button>
+        <div class="alert alert-success" role="alert" *ngIf="isAddedToCollection">
+          <h6 class="alert-heading">Added recipe! 😊</h6>
+          <p>Aww yeah, you successfully add this recipe to your collection.</p>
+        </div>
       </div>
     </div>
     <div class="row">

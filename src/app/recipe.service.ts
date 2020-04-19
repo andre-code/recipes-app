@@ -8,17 +8,18 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class RecipeService {
   private _apiUrl: string = 'https://api.spoonacular.com/recipes/';
-  private _apiKey: string = '308357da2eb74240808ec0dfa5f0a90c';
+  private _apiKey: string = '9df28b8025694322bc46976a81e16cc3';
 
   constructor(private _http: HttpClient) { }
-  public getRecipes(type: string = 'lunch', cusine:string = 'Italian'): Observable<any> {
+  public getRecipes(type: string = 'lunch', cusine:string = 'Italian', offset:string = '0'): Observable<any> {
     console.log(type, cusine);
     let params = new HttpParams()
                 .set('apiKey', this._apiKey)
                 .set('number', '20')
                 .set('addRecipeInformation', 'true')
                 .set('type', type)
-                .set('cusine', cusine);
+                .set('cusine', cusine)
+                .set('offset', offset);
     return this._http.get(this._apiUrl+'complexSearch', {params})
           .pipe(
             catchError( (err:any): any => {
